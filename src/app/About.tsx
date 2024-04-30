@@ -44,16 +44,16 @@ export default function About() {
     <>
       <Suspense fallback={<Loading />}>
         {isMobileDevice && (
-          <div className="z-[10000002] w-svw h-svh bg-[#011910] flex flex-col items-center justify-center ">
+          <main className="z-[10000002] w-svw h-svh bg-[#011910] flex flex-col items-center justify-center ">
             <div className="phone h-20 w-40 border-3 border-4 border-[#B45A00] rounded-lg animate-rotate"></div>
             <div className="text-[#B45A00] font-extrabold text-center text-2xl mt-16">
               Please rotate your device!
             </div>
-          </div>
+          </main>
         )}
 
         {!isMobileDevice && (
-          <div className="h-svh">
+          <main className="h-svh">
             <Canvas
               flat
               camera={{
@@ -93,7 +93,7 @@ export default function About() {
                 </mesh>
               </Center>
             </Canvas>
-          </div>
+          </main>
         )}
       </Suspense>
     </>

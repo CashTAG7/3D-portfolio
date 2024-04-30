@@ -16,10 +16,10 @@ import Project from './app/Project';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      <Route path="*" element={<NotFound />} />
       <Route path="" element={<Home />} />
       <Route path="about" element={<About />} />
       <Route path="project" element={<Project />} />
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );
