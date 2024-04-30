@@ -1,5 +1,4 @@
 import { Html } from '@react-three/drei';
-
 import { Object3D, Object3DEventMap, Mesh } from 'three';
 
 interface Props {
