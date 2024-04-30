@@ -52,7 +52,7 @@ export default function Home() {
         {!isMobileDevice && (
           <main className="h-svh">
             <Canvas
-             frameloop="demand"
+            
               flat
               camera={{
                 fov: 40,
