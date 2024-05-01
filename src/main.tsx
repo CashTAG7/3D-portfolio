@@ -12,6 +12,7 @@ import Home from './app/Home';
 import About from './app/About';
 import NotFound from './app/NotFound';
 import Project from './app/Project';
+import Test from './app/Test';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
       <Route path="" element={<Home />} />
       <Route path="about" element={<About />} />
       <Route path="project" element={<Project />} />
+      <Route path="test" element={<Test />} />
       <Route path="*" element={<NotFound />} />
     </Route>
   )
