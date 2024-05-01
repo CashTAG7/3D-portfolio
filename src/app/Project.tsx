@@ -1,5 +1,5 @@
 import { Canvas, useLoader } from '@react-three/fiber';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Center, useGLTF } from '@react-three/drei';
 import { Mesh, TextureLoader } from 'three';
 import CameraControls from '../components/CameraControls';
@@ -13,6 +13,7 @@ import Project4 from '../components/projectComponents/Project4';
 import Project5 from '../components/projectComponents/Project5';
 import Project6 from '../components/projectComponents/Project6';
 import Project7 from '../components/projectComponents/Project7';
+import Loading from './Loading';
 
 export default function Project() {
   const [isMobileDevice, setIsMobileDevice] = useState(false);
@@ -45,32 +46,34 @@ export default function Project() {
 
   return (
     <>
-      {isMobileDevice && (
-        <main className="z-[10000002] w-svw h-svh bg-[#011910] flex flex-col items-center justify-center ">
-          <div className="phone h-20 w-40 border-3 border-4 border-[#B45A00] rounded-lg animate-rotate"></div>
-          <div className="text-[#B45A00] font-extrabold text-center text-2xl mt-16">
-            Please rotate your device!
-          </div>
-        </main>
-      )}
+      <Suspense fallback={<Loading />}>
+        {isMobileDevice && (
+          <main className="z-[10000002] w-svw h-svh bg-[#011910] flex flex-col items-center justify-center ">
+            <div className="phone h-20 w-40 border-3 border-4 border-[#B45A00] rounded-lg animate-rotate"></div>
+            <div className="text-[#B45A00] font-extrabold text-center text-2xl mt-16">
+              Please rotate your device!
+            </div>
+          </main>
+        )}
 
-      {!isMobileDevice && (
-        <main className="h-svh">
-          <Canvas
-            flat
-            camera={{
-              fov: 15,
-              near: 0.1,
-              far: 200,
-              position: [0, 1, 8.5],
-            }}
-          >
-            <color args={['#011910']} attach="background" />
+        {!isMobileDevice && (
+          <main className="h-svh">
+            <Canvas
+              flat
+              camera={{
+                fov: 15,
+                near: 0.1,
+                far: 200,
+                position: [0, 1, 8.5],
+              }}
+            >
+              <color args={['#011910']} attach="background" />
 
-            <Scene />
-          </Canvas>
-        </main>
-      )}
+              <Scene />
+            </Canvas>
+          </main>
+        )}
+      </Suspense>
     </>
   );
 }

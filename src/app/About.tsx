@@ -37,9 +37,6 @@ export default function About() {
     };
   }, []);
 
-  const { nodes } = useGLTF('./about/about.glb');
-  const bakedTexture = useLoader(TextureLoader, './about/bakedAbout.jpg');
-
   return (
     <>
       <Suspense fallback={<Loading />}>
@@ -65,33 +62,7 @@ export default function About() {
             >
               <color args={['#011910']} attach="background" />
 
-              <CameraControls />
-
-              <Center>
-                <mesh
-                  geometry={(nodes.merged as Mesh).geometry}
-                  position={nodes.merged.position}
-                  rotation={nodes.merged.rotation}
-                  scale={nodes.merged.scale}
-                >
-                  <meshBasicMaterial map={bakedTexture} map-flipY={false} />
-                </mesh>
-
-                <MonitorAbout nodes={nodes} />
-
-                <ClockAbout nodes={nodes} />
-
-                <Certificate nodes={nodes} />
-
-                <mesh
-                  geometry={(nodes.window as Mesh).geometry}
-                  position={nodes.window.position}
-                  rotation={nodes.window.rotation}
-                  scale={nodes.window.scale}
-                >
-                  <meshBasicMaterial color="#E69B00" />
-                </mesh>
-              </Center>
+              <Scene />
             </Canvas>
           </main>
         )}
@@ -99,3 +70,39 @@ export default function About() {
     </>
   );
 }
+
+const Scene = () => {
+  const { nodes } = useGLTF('./about/about.glb');
+  const bakedTexture = useLoader(TextureLoader, './about/bakedAbout.jpg');
+  return (
+    <>
+      <CameraControls />
+
+      <Center>
+        <mesh
+          geometry={(nodes.merged as Mesh).geometry}
+          position={nodes.merged.position}
+          rotation={nodes.merged.rotation}
+          scale={nodes.merged.scale}
+        >
+          <meshBasicMaterial map={bakedTexture} map-flipY={false} />
+        </mesh>
+
+        <MonitorAbout nodes={nodes} />
+
+        <ClockAbout nodes={nodes} />
+
+        <Certificate nodes={nodes} />
+
+        <mesh
+          geometry={(nodes.window as Mesh).geometry}
+          position={nodes.window.position}
+          rotation={nodes.window.rotation}
+          scale={nodes.window.scale}
+        >
+          <meshBasicMaterial color="#E69B00" />
+        </mesh>
+      </Center>
+    </>
+  );
+};
