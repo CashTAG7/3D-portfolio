@@ -1,7 +1,6 @@
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Center, OrbitControls, Text3D } from '@react-three/drei';
 import { Canvas, useThree } from '@react-three/fiber';
-import Loading from './Loading';
 
 export default function NotFound() {
   const [isMobileDevice, setIsMobileDevice] = useState(false);
@@ -36,26 +35,24 @@ export default function NotFound() {
 
   return (
     <>
-      <Suspense fallback={<Loading />}>
-        {isMobileDeviceRotated && (
-          <main className="z-[10000002] w-svw h-svh bg-[#011910] flex flex-col items-center justify-center ">
-            <div className="phone h-20 w-40 border-3 border-4 border-[#B45A00] rounded-lg animate-rotate"></div>
-            <div className="text-[#B45A00] font-extrabold text-center text-2xl mt-16">
-              Please rotate your device!
-            </div>
-          </main>
-        )}
+      {isMobileDeviceRotated && (
+        <main className="z-[10000002] w-svw h-svh bg-[#011910] flex flex-col items-center justify-center ">
+          <div className="phone h-20 w-40 border-3 border-4 border-[#B45A00] rounded-lg animate-rotate"></div>
+          <div className="text-[#B45A00] font-extrabold text-center text-2xl mt-16">
+            Please rotate your device!
+          </div>
+        </main>
+      )}
 
-        {!isMobileDeviceRotated && (
-          <main className="h-svh">
-            <Canvas orthographic camera={{ position: [0, 0, 100], zoom: 100 }}>
-              <color args={['#011910']} attach="background" />
+      {!isMobileDeviceRotated && (
+        <main className="h-svh">
+          <Canvas orthographic camera={{ position: [0, 0, 100], zoom: 100 }}>
+            <color args={['#011910']} attach="background" />
 
-              <Scene margin={0.5} isMobileDevice={isMobileDevice} />
-            </Canvas>
-          </main>
-        )}
-      </Suspense>
+            <Scene margin={0.5} isMobileDevice={isMobileDevice} />
+          </Canvas>
+        </main>
+      )}
     </>
   );
 }
